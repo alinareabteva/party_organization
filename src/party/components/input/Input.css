@@ -1,10 +1,11 @@
 .input {
   box-sizing: border-box;
   height: 40px;
-  width: 15vw;
+  width: 20vw;
+  min-width: 200px;
   padding: 12px;
   border: 1px solid #EBEBEB;
-  margin-left: 15px;
+  margin-left: 10px;
 }
 
 .input[disabled] {
@@ -25,15 +26,16 @@
 
 .inputWrapper {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: flex-end;
+  position: relative;
 }
 
 .labelsWrapper {
-  margin-bottom: 5px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: flex-start;
+  align-items: center;
 }
 
 .inputRequired {
@@ -43,12 +45,16 @@
 .inputRequired,
 .inputLabel {
   font-weight: 600;
-  font-size: 10px;
+  font-size: 14px;
   text-transform: uppercase;
+  width: 10em;
 }
 
 .inputError {
   margin-top: 5px;
   color: #D43728;
   font-size: 12px;
+}
+.text{
+  text-decoration: underline;
 }
