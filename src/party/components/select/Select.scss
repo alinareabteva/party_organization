@@ -1,0 +1,10 @@
+.select {
+    display: flex;
+    flex-direction: column;
+}
+
+.option {
+    &.selected {
+        background-color: #ffb5a7;
+    }
+}
