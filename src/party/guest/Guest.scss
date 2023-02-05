@@ -1,0 +1,81 @@
+.guest-wrapper {
+    border: 1px solid black;
+    padding: 60px;
+}
+
+#box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    width: 40vw;
+    background: #fefae0;
+    border: solid 1px #000;
+}
+
+#guests {
+    font-weight: 600;
+    font-size: 16px;
+    text-transform: uppercase;
+    text-align: start;
+
+}
+
+.sex {
+    .inputWrapper {
+        .labelsWrapper {
+            .inputLabel {
+                width: unset;
+            }
+        }
+
+        input {
+            &.input {
+                min-width: unset;
+                width: 15px;
+                height: 15px;
+            }
+        }
+    }
+
+    .labelSex {
+        font-weight: 600;
+        font-size: 14px;
+        text-transform: uppercase;
+        width: 19vw;
+        margin-right: -20%;
+        display: flex;
+        justify-content: space-between;
+
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .sex {
+        .inputWrapper {
+            .labelsWrapper {
+                .inputLabel {
+                    width: unset;
+                }
+            }
+
+            input {
+                &.input {
+                    min-width: unset;
+                    width: 15px;
+                    height: 15px;
+                }
+            }
+        }
+
+        .labelSex {
+            font-weight: 600;
+            font-size: 14px;
+            text-transform: uppercase;
+            width: 250px;
+            display: flex;
+            flex-direction: row;
+
+        }
+    }
+}
