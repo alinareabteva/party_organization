@@ -1,40 +1,26 @@
-import React, { useState } from "react";
+import React from "react";
 import Input from "../components/input/Input";
 import "./PartyOrganization.scss";
 
-const PartyOrganization = () => {
-    const [state, setState] = useState({
-        partyName: "",
-        firstName: "",
-        lastName: "",
-        place: "",
-        phoneNumber: ""
-    })
-
-    const handleChange = ({ target: { name, value } }) => {
-        setState(prevState => ({
-            ...prevState,
-            [name]: value
-        }))
-    }
+const PartyOrganization = ({ partyOrganization, handleChange }) => {
 
     return (
         <>
             <div className="row">
-                <Input id="partyName" label="Party Name:" placeholder="Enter Party Name" type="text" value={state.partyName} onChange={handleChange} />
+                <Input id="partyName" label="Party Name:" placeholder="Enter Party Name" type="text" value={partyOrganization.partyName} onChange={handleChange} />
             </div>
 
             <div className="row organizer">
-                <Input id="firstName" label="Organizer:" placeholder="First Name" type="text" value={state.firstName} onChange={handleChange} />
-                <Input id="lastName" placeholder="Last Name" type="text" value={state.lastName} onChange={handleChange} />
+                <Input id="firstName" label="Organizer:" placeholder="First Name" type="text" value={partyOrganization.firstName} onChange={handleChange} />
+                <Input id="lastName" placeholder="Last Name" type="text" value={partyOrganization.lastName} onChange={handleChange} />
             </div>
 
             <div className="row">
-                <Input id="place" label="Place:" placeholder="Enter Place" type="text" value={state.place} onChange={handleChange} />
+                <Input id="place" label="Place:" placeholder="Enter Place" type="text" value={partyOrganization.place} onChange={handleChange} />
             </div>
 
             <div className="row">
-                <Input id="phoneNumber" label="Phone number:" placeholder="Phone Number" type="text" value={state.phoneNumber} onChange={handleChange} />
+                <Input id="phoneNumber" label="Phone number:" placeholder="Phone Number" type="text" value={partyOrganization.phoneNumber} onChange={handleChange} />
             </div>
 
         </>
