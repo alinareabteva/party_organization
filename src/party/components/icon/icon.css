@@ -1,0 +1,21 @@
+
+.icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.action {
+  cursor: pointer;
+}
+
+.action.disabled {
+  cursor: not-allowed;
+}
+
+.action.disabled svg path {
+  opacity: 0.5;
+}
+.text{
+  text-decoration: underline;
+}
