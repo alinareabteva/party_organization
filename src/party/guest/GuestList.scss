@@ -1,0 +1,32 @@
+.guestList {
+    overflow-y: scroll;
+    height: 50vh;
+    border: solid 1px #000;
+    padding: 20px;
+}
+
+.guestsLabel {
+    font-weight: 600;
+    font-size: 16px;
+    text-transform: uppercase;
+    text-align: start;
+}
+
+.addGuest {
+    display: flex;
+    justify-content: center;
+
+    button.btn {
+        background-color: #95d5b2;
+        border-radius: 10px;
+        box-shadow: rgb(44 187 99 / 20%) 0 -25px 18px -14px inset, rgb(44 187 99 / 15%) 0 1px 2px, rgb(44 187 99 / 15%) 0 2px 4px, rgb(44 187 99 / 15%) 0 4px 8px, rgb(44 187 99 / 15%) 0 8px 16px, rgb(44 187 99 / 15%) 0 16px 32px;
+        color: #000;
+        cursor: pointer;
+        padding: 14px 55px;
+        margin-top: 15px;
+        margin-bottom: 15px;
+        border: 0;
+        font-size: 16px;
+        user-select: none;
+    }
+}
