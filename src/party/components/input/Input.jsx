@@ -23,9 +23,6 @@ const Input = ({
         {label
           && <label className="inputLabel" htmlFor={id}>{label}</label>
         }
-        {attrs.required
-          && <span className="inputRequired">Required</span>
-        }
       </div>
       <input
         name={id}
@@ -41,7 +38,7 @@ const Input = ({
 };
 
 Input.propTypes = {
-  id: PropTypes.string.isRequired,
+  id: PropTypes.string,
   className: PropTypes.string,
   label: PropTypes.string,
   error: PropTypes.string,
