@@ -1,52 +1,49 @@
 import React, { useState } from "react";
-import Input from "./components/input/Input";
-import Guest from "./guest/Guest";
+import PartyOrganization from "./party_organization/PartyOrganization";
+import GuestList, { GUEST_INITIAL_STATE } from "./guest/GuestList";
 import "./Party.css";
 
 const Party = () => {
     const [state, setState] = useState({
-        partyName: "",
-        firstName: "",
-        lastName: "",
-        place: "",
-        phoneNumber: ""
+        partyOrganization: {
+            partyName: "",
+            firstName: "",
+            lastName: "",
+            place: "",
+            phoneNumber: ""
+        },
+        guests: [{
+            ...GUEST_INITIAL_STATE
+        }]
+
     })
 
-    const handleChange = ({ target: { name, value } }) => {
+    const handlePartyOrganizationChange = ({ target: { name, value } }) => {
         setState(prevState => ({
             ...prevState,
-            [name]: value
+            partyOrganization: {
+                ...prevState.partyOrganization,
+                [name]: value
+            }
         }))
     }
 
+    const handleGuestChange = (guests) => {
+        setState(prevState => ({
+            ...prevState,
+            guests
+
+        }))
+
+    }
+
     return (
-        <><form id="form">
+        <form id="form">
             <div id="container">
-                <div className="row">
-                    <Input id="partyName" label="Party Name:" placeholder="Enter Party Name" type="text" value={state.partyName} onChange={handleChange} />
-                </div>
-
-                <div className="row organizer">
-                    <Input id="firstName" label="Organizer:" placeholder="First Name" type="text" value={state.firstName} onChange={handleChange} />
-                    <Input id="lastName" placeholder="Last Name" type="text" value={state.lastName} onChange={handleChange} />
-                </div>
-
-                <div className="row">
-                    <Input id="place" label="Place:" placeholder="Enter Place" type="text" value={state.place} onChange={handleChange} />
-                </div>
-
-                <div className="row">
-                    <Input id="phoneNumber" label="Phone number:" placeholder="Phone Number" type="text" value={state.phoneNumber} onChange={handleChange} />
-                </div>
-
-                <Guest />
-
+                <PartyOrganization handleChange={handlePartyOrganizationChange} partyOrganization={state.partyOrganization} />
+                <GuestList guests={state.guests} onChangeGuests={handleGuestChange} />
             </div>
-
-
         </form>
-
-            <div className="footer">Created by Reabtev Alina </div></>
     );
 }
 
