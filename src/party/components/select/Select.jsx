@@ -2,19 +2,15 @@ import React from "react";
 import PropTypes from "prop-types";
 import "./Select.scss";
 
-
 const Select = ({ options, selectedOptions, onChange, allowMultiple = false }) => {
 
-
-
     const onClickOption = (e) => {
-        const { target: { dataset: {value} } } = e;
+        const { target: { dataset: { value } } } = e;
         if (!allowMultiple) {
             onChange(value);
             return
         }
 
-        e.preventDefault()
         let newOptions = []
         if (selectedOptions.includes(value)) {
             newOptions = selectedOptions.filter(el => el !== value)
@@ -24,7 +20,6 @@ const Select = ({ options, selectedOptions, onChange, allowMultiple = false }) =
 
         onChange(newOptions)
     }
-
 
     return (
         <div className="select" onClick={onClickOption}>
