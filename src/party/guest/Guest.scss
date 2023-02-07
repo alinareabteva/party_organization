@@ -19,6 +19,7 @@
 }
 
 .sex {
+    width: 23vw;
     .inputWrapper {
         .labelsWrapper {
             .inputLabel {
@@ -29,7 +30,7 @@
         input {
             &.input {
                 min-width: unset;
-                width: 15px;
+                width: 25px;
                 height: 15px;
             }
         }
@@ -39,7 +40,7 @@
         font-weight: 600;
         font-size: 14px;
         text-transform: uppercase;
-        width: 19vw;
+        width: 18vw;
         margin-right: -20%;
         display: flex;
         justify-content: space-between;
@@ -96,6 +97,7 @@
 
 @media screen and (max-width: 1000px) {
     .sex {
+        width: 27vw;
         .inputWrapper {
             .labelsWrapper {
                 .inputLabel {
@@ -106,7 +108,7 @@
             input {
                 &.input {
                     min-width: unset;
-                    width: 15px;
+                    width: 25px;
                     height: 15px;
                 }
             }
@@ -116,7 +118,6 @@
             font-weight: 600;
             font-size: 14px;
             text-transform: uppercase;
-            width: 250px;
             display: flex;
             flex-direction: row;
 

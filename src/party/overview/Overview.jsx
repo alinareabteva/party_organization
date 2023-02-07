@@ -1,13 +1,13 @@
 import React from "react";
-
 import Button from "../components/button/Button";
+import Guest from "../guest/Guest";
+import GuestList from "../guest/GuestList";
 import "./Overview.scss";
 
 
 const Overview = () => {
 
-
-
+    
     return (
         <div className="overview">
             <h2 className="overviewLabel">Overview:</h2>
