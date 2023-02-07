@@ -37,6 +37,11 @@
   align-items: center;
 }
 
+.redTextError {
+  display: flex;
+  flex-direction: column;
+}
+
 .inputRequired {
   color: #777;
 }
@@ -50,9 +55,9 @@
 }
 
 .inputError {
-  margin-top: 5px;
   color: #D43728;
   font-size: 12px;
+  margin-left: 10px;
 }
 .text{
   text-decoration: underline;

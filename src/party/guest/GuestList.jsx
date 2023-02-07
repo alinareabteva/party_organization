@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import Guest from "./Guest";
 import Button from "../components/button/Button";
 import "./GuestList.scss";
