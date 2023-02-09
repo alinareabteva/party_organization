@@ -4,18 +4,22 @@ import GuestList, { GUEST_INITIAL_STATE } from "./guest/GuestList";
 import Overview from "./overview/Overview";
 import "./Party.css";
 
-const Party = () => {
+const usePartyState = () => {
     const [state, setState] = useState({
         partyOrganization: {
             partyName: "",
             firstName: "",
             lastName: "",
             place: "",
+            date: "",
             phoneNumber: ""
         },
         guests: [{
             ...GUEST_INITIAL_STATE
-        }]
+        }],
+        modal: {
+            open: false,
+        }
 
     })
 
@@ -37,16 +41,32 @@ const Party = () => {
         }))
 
     }
+    return {
+        partyState: state,
+        handlePartyOrganizationChange,
+        handleGuestChange
+    }
+}
+
+const Party = () => {
+    const {
+        partyState: {partyOrganization, guests},
+        handlePartyOrganizationChange,
+        handleGuestChange
+    } = usePartyState();
 
     return (
-        <form id="form">
-            <div id="container">
-                <PartyOrganization handleChange={handlePartyOrganizationChange} partyOrganization={state.partyOrganization} />
-                <GuestList guests={state.guests} onChangeGuests={handleGuestChange} />
-                <Overview />
-
-            </div>
-        </form>
+        <>
+            <form id="form">
+                <div id="container">
+                    <PartyOrganization handleChange={handlePartyOrganizationChange} partyOrganization={partyOrganization} />
+                    <GuestList guests={guests} onChangeGuests={handleGuestChange} />
+                    <Overview guests={guests} />
+                </div>
+                {/* submit Button */}
+            </form>
+            {/* modal */}
+        </>
     );
 }
 
