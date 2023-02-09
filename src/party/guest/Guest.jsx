@@ -11,6 +11,10 @@ const Guest = ({ guest, index, handleGuestChange, onClickDelete, onAlcoholChange
         handleGuestChange(index, name, value)
     }
 
+    const handleRadioBtnChange = ({ target: { value } }) => {
+        handleGuestChange(index, 'sex', value)
+    }
+
     useEffect(() => {
         if (isLastItem && ref.current) {
             ref.current.scrollIntoView({
@@ -34,8 +38,22 @@ const Guest = ({ guest, index, handleGuestChange, onClickDelete, onAlcoholChange
                 </div>
                 <div className="row sex">
                     <label className="labelSex">Sex:</label>
-                    <Input name="sex" label="M" value="M" type="radio" checked={guest.sex === "M"} onChange={handleChange} />
-                    <Input name="sex" label="F" value="F" type="radio" checked={guest.sex === "F"} onChange={handleChange} />
+                    <Input
+                        name={`guest[${index}].sex`}
+                        label="M"
+                        value="M"
+                        type="radio"
+                        checked={guest.sex === "M"}
+                        onChange={handleRadioBtnChange}
+                    />
+                    <Input
+                        name={`guest[${index}].sex`}
+                        label="F"
+                        value="F"
+                        type="radio"
+                        checked={guest.sex === "F"}
+                        onChange={handleRadioBtnChange}
+                    />
                 </div>
                 <div className="row select">
                     <label className="labelAlcohol">Alcohol:</label>
