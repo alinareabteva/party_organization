@@ -20,6 +20,10 @@ const PartyOrganization = ({ partyOrganization, handleChange }) => {
             </div>
 
             <div className="row">
+                <Input id="date" label="Date:" placeholder="Enter Date" type="date" value={partyOrganization.date} onChange={handleChange} />
+            </div>
+
+            <div className="row">
                 <Input id="phoneNumber" label="Phone number:" placeholder="Phone Number" type="text" value={partyOrganization.phoneNumber} onChange={handleChange} />
             </div>
 
