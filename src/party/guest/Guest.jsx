@@ -26,15 +26,39 @@ const Guest = ({ guest, index, handleGuestChange, onClickDelete, onAlcoholChange
     return (
         <div className="guest-wrapper" ref={ref}>
             <div className="box">
-                <Icon onClick={() => onClickDelete(index)} size={IconSizes.medium} name={IconNames.Close} />
+                <Icon
+                    onClick={() => onClickDelete(index)}
+                    size={IconSizes.medium}
+                    name={IconNames.Close}
+                />
                 <div className="row">
-                    <Input name="firstName" label="First Name:" placeholder="First Name" type="text" value={guest.firstName} onChange={handleChange} />
+                    <Input
+                        name="firstName"
+                        label="First Name:"
+                        placeholder="First Name"
+                        type="text"
+                        value={guest.firstName}
+                        onChange={handleChange}
+                    />
                 </div>
                 <div className="row">
-                    <Input name="lastName" label="Last Name:" placeholder="Last Name" type="text" value={guest.lastName} onChange={handleChange} />
+                    <Input
+                        name="lastName"
+                        label="Last Name:"
+                        placeholder="Last Name"
+                        type="text"
+                        value={guest.lastName}
+                        onChange={handleChange}
+                    />
                 </div>
                 <div className="row">
-                    <Input name="birthDate" label="Birth Date:" type="date" value={guest.birthDate} onChange={handleChange} />
+                    <Input
+                        name="birthDate"
+                        label="Birth Date:"
+                        type="date"
+                        value={guest.birthDate}
+                        onChange={handleChange}
+                    />
                 </div>
                 <div className="row sex">
                     <label className="labelSex">Sex:</label>
@@ -57,7 +81,12 @@ const Guest = ({ guest, index, handleGuestChange, onClickDelete, onAlcoholChange
                 </div>
                 <div className="row select">
                     <label className="labelAlcohol">Alcohol:</label>
-                    <Select allowMultiple onChange={(alcohol) => onAlcoholChange(index, alcohol)} options={alcoholOptions} selectedOptions={guest.alcohol} />
+                    <Select
+                        allowMultiple
+                        onChange={(alcohol) => onAlcoholChange(index, alcohol)}
+                        options={alcoholOptions}
+                        selectedOptions={guest.alcohol}
+                    />
                 </div>
 
             </div>
