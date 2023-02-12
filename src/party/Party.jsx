@@ -20,6 +20,9 @@ const usePartyState = () => {
         guests: [{
             ...GUEST_INITIAL_STATE
         }],
+        errors: {
+
+        },
         modal: {
             open: false,
         }
@@ -45,7 +48,8 @@ const usePartyState = () => {
 
     }
 
-    const openModal = () => {
+    const openModal = (e) => {
+        e.preventDefault();
         setState(prevState => ({
             ...prevState,
             modal: {
@@ -95,6 +99,16 @@ const Party = () => {
         handleCancel
     } = usePartyState();
 
+    const handleClickSubmit = (e) => {
+
+        // check party organisation (validate all inputs in state.partyOrganization)
+        // if there exist at least one error show them on related input
+        // only if user has no errors -> then we need to show modal
+        // (note: when user inputs some values we need to remove error if exist for that input)
+        openModal(e)
+        
+    }
+
     return (
         <>
             <form id="form">
@@ -107,11 +121,11 @@ const Party = () => {
                         onChangeGuests={handleGuestChange} />
                     <Overview guests={guests} />
                 </div>
-                <SubmitButton onClick={openModal} />
+                <SubmitButton onClick={handleClickSubmit} />
             </form>
             <Modal
                 title="The affirmation"
-                isOpen={openModal}
+                isOpen={modal.open}
                 onCancel={handleCancel}
                 onSubmit={handleSubmit}
             >
