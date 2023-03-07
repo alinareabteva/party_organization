@@ -63,8 +63,8 @@ const PartyOrganization = ({ partyOrganization, handleChange }) => {
                     label="Phone number:"
                     placeholder="Phone Number"
                     type="text"
-                    value={partyOrganization.phoneNumber} o
-                    nChange={handleChange}
+                    value={partyOrganization.phoneNumber} 
+                    onChange={handleChange}
                 />
             </div>
 
