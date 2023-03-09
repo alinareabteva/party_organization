@@ -2,8 +2,7 @@ import React from "react";
 import Input from "../components/input/Input";
 import "./PartyOrganization.scss";
 
-const PartyOrganization = ({ partyOrganization, handleChange }) => {
-
+const PartyOrganization = ({ partyOrganization, handleChange, errors }) => {
     return (
         <>
             <div className="row">
@@ -14,6 +13,7 @@ const PartyOrganization = ({ partyOrganization, handleChange }) => {
                     type="text"
                     value={partyOrganization.partyName}
                     onChange={handleChange}
+                    error={errors?.partyName}
                 />
             </div>
 
@@ -25,6 +25,7 @@ const PartyOrganization = ({ partyOrganization, handleChange }) => {
                     type="text"
                     value={partyOrganization.firstName}
                     onChange={handleChange}
+                    error={errors?.firstName}
                 />
                 <Input
                     id="lastName"
@@ -32,6 +33,7 @@ const PartyOrganization = ({ partyOrganization, handleChange }) => {
                     type="text"
                     value={partyOrganization.lastName}
                     onChange={handleChange}
+                    error={errors?.lastName}
                 />
             </div>
 
@@ -43,6 +45,7 @@ const PartyOrganization = ({ partyOrganization, handleChange }) => {
                     type="text"
                     value={partyOrganization.place}
                     onChange={handleChange}
+                    error={errors?.place}
                 />
             </div>
 
@@ -54,6 +57,7 @@ const PartyOrganization = ({ partyOrganization, handleChange }) => {
                     type="date"
                     value={partyOrganization.date}
                     onChange={handleChange}
+                    error={errors?.date}
                 />
             </div>
 
@@ -63,8 +67,9 @@ const PartyOrganization = ({ partyOrganization, handleChange }) => {
                     label="Phone number:"
                     placeholder="Phone Number"
                     type="text"
-                    value={partyOrganization.phoneNumber} 
+                    value={partyOrganization.phoneNumber}
                     onChange={handleChange}
+                    error={errors?.phoneNumber}
                 />
             </div>
 
