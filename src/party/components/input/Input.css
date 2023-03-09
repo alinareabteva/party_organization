@@ -54,6 +54,12 @@
   width: 10em;
 }
 
+.inputWithErrors {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
 .inputError {
   color: #D43728;
   font-size: 12px;

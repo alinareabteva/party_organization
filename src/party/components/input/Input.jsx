@@ -5,10 +5,10 @@ import classNames from 'classnames';
 import './Input.css';
 
 const Input = ({
-  id, 
-  className = '', 
-  label = '', 
-  error = '', 
+  id,
+  className = '',
+  label = '',
+  error = '',
   ...attrs
 }) => {
   const classes = classNames(
@@ -24,16 +24,17 @@ const Input = ({
           && <label className="inputLabel" htmlFor={id}>{label}</label>
         }
       </div>
-      {error
-        && <span className="inputError">{error}</span>
-      }
-      <input
-        name={id}
-        id={id}
-        className={classes}
-        {...attrs}
-      />
-      
+      <div className="inputWithErrors">
+        {error
+          && <span className="inputError">{error}</span>
+        }
+        <input
+          name={id}
+          id={id}
+          className={classes}
+          {...attrs}
+        />
+      </div>
     </div>
   );
 };
