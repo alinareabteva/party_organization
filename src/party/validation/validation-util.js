@@ -25,8 +25,7 @@ export const maxSymbolsValidator = (number, errorMessage) => {
 }
 
 export const dateValidator = (limitYear, errorMessage) => {
-    return validatorHelper(v => getAge(v) >= limitYear, errorMessage  )     
-   
+    return validatorHelper(v => getAge(v) >= limitYear, errorMessage)
 }
 
 export const validateObject = (objectToValidate, schemaForValidate) => {
