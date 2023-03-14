@@ -5,7 +5,7 @@ import Icon, { IconNames, IconSizes } from "../components/icon/icon";
 import { alcoholOptions } from "./Data";
 import "./Guest.scss";
 
-const Guest = ({ guest, index, handleGuestChange, onClickDelete, onAlcoholChange, isLastItem }) => {
+const Guest = ({ guest, index, handleGuestChange, onClickDelete, onAlcoholChange, isLastItem, errors }) => {
     const ref = useRef(null)
     const handleChange = ({ target: { name, value } }) => {
         handleGuestChange(index, name, value)
@@ -18,7 +18,8 @@ const Guest = ({ guest, index, handleGuestChange, onClickDelete, onAlcoholChange
     useEffect(() => {
         if (isLastItem && ref.current) {
             ref.current.scrollIntoView({
-                behavior: "smooth"
+                behavior: "smooth",
+                block: "center"
             })
         }
     }, [ref, isLastItem])
@@ -37,6 +38,7 @@ const Guest = ({ guest, index, handleGuestChange, onClickDelete, onAlcoholChange
                         label="First Name:"
                         placeholder="First Name"
                         type="text"
+                        error={errors?.firstName}
                         value={guest.firstName}
                         onChange={handleChange}
                     />
@@ -47,6 +49,7 @@ const Guest = ({ guest, index, handleGuestChange, onClickDelete, onAlcoholChange
                         label="Last Name:"
                         placeholder="Last Name"
                         type="text"
+                        error={errors?.lastName}
                         value={guest.lastName}
                         onChange={handleChange}
                     />
@@ -56,6 +59,7 @@ const Guest = ({ guest, index, handleGuestChange, onClickDelete, onAlcoholChange
                         name="birthDate"
                         label="Birth Date:"
                         type="date"
+                        error={errors?.birthDate}
                         value={guest.birthDate}
                         onChange={handleChange}
                     />

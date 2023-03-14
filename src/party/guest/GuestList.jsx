@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import Guest from "./Guest";
 import Button from "../components/button/Button";
 import "./GuestList.scss";
@@ -11,7 +11,7 @@ export const GUEST_INITIAL_STATE = {
     alcohol: [],
 }
 
-const GuestList = ({ guests, onChangeGuests }) => {
+const GuestList = ({ guests, onChangeGuests, errors }) => {
 
     const alcoholChange = (id, value) => {
         onChangeGuests(guests.map((el, index) => {
@@ -56,6 +56,11 @@ const GuestList = ({ guests, onChangeGuests }) => {
 
     }
 
+    const isDisabled = useMemo(() => {
+        return errors.some((error) => Object.values(error).length > 0);
+    }, [errors])
+
+
     return (
         <div className="guests">
             <h2 className="guestsLabel">Guests:</h2>
@@ -64,6 +69,7 @@ const GuestList = ({ guests, onChangeGuests }) => {
                     <Guest
                         key={index}
                         index={index}
+                        errors={errors[index]}
                         isLastItem={index === guests.length - 1}
                         guest={el}
                         handleGuestChange={handleChange}
@@ -73,8 +79,15 @@ const GuestList = ({ guests, onChangeGuests }) => {
                 )}
             </div>
             <div className="addGuest">
-                <Button onClick={addGuest}>Add Guest</Button>
+                <Button
+                    onClick={addGuest}
+                    disabled={isDisabled}
+                >
+                    Add Guest
+                </Button>
+
             </div>
+
         </div>
     )
 };
