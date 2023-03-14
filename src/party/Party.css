@@ -22,7 +22,11 @@
 }
 
 .guests-list {
-    width: 300px;
+    width: 320px;
+    height: 90px;
     border: solid 1px #000;
+    margin-left: 50px;
+    overflow-y: scroll;
+
 }
 

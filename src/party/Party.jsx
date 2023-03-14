@@ -1,195 +1,70 @@
-import React, { useState } from "react";
+import React, { useEffect, useMemo } from "react";
 import PartyOrganization from "./party_organization/PartyOrganization";
-import GuestList, { GUEST_INITIAL_STATE } from "./guest/GuestList";
-import Overview from "./overview/Overview";
-import SubmitButton from "./submit_button/SubmitButton";
+import GuestList from "./guest/GuestList";
+import Overview, {getAge} from "./overview/Overview";
+import SubmitButton from "./components/submit_button/SubmitButton";
 import Modal from "./components/modal/Modal";
-import { validateObject, requiredValidator, minSymbolsValidator, maxSymbolsValidator, dateValidator } from "./validation/validation-util"
+import { validateObject } from "./validation/validation-util";
+import { usePartyState } from "./usePartyState";
+import { PARTY_ORGANISATION_VALIDATION_SCHEMA } from "./party_organization/party-organisation-validation-schema";
+import { GUEST_VALIDATION_SCHEMA } from "./guest/guest-validation-schema";
 import "./Party.css";
-
-const PARTY_ORGANISATION_VALIDATION_SCHEMA = {
-    partyName: {
-        validators: [
-            requiredValidator("Party Name is required"),
-            minSymbolsValidator(5, "Party Name must have at least 5 characters"),
-            maxSymbolsValidator(20, "Party Name must have a maximum 20 characters")
-        ]
-    },
-    firstName: {
-        validators: [
-            requiredValidator("First Name is required"),
-            minSymbolsValidator(4, "First Name must have at least 4 characters"),
-            maxSymbolsValidator(20, "First Name must have a maximum 20 characters")
-        ]
-    },
-    lastName: {
-        validators: [
-            requiredValidator("Last Name is required"),
-            minSymbolsValidator(4, "Last Name must have at least 4 characters"),
-            maxSymbolsValidator(20, "Last Name must have a maximum 20 characters")
-        ]
-    },
-    place: {
-        validators: [
-            requiredValidator("Place is required"),
-            maxSymbolsValidator(30, "Place must have a maximum 30 characters")
-        ]
-    },
-    date: {
-        validators: [
-            requiredValidator("Date is required"),
-            dateValidator(18, "You must be 18 years old")
-
-        ]
-    },
-    phoneNumber: {
-        validators: [
-            requiredValidator("Phone Number is required"),
-            maxSymbolsValidator(11, "Phone Number must have a maximum 11 characters")
-        ]
-    },
-}
-
-const usePartyState = () => {
-    const [state, setState] = useState({
-        partyOrganization: {
-            partyName: "",
-            firstName: "",
-            lastName: "",
-            place: "",
-            date: "",
-            phoneNumber: ""
-        },
-        guests: [{
-            ...GUEST_INITIAL_STATE
-        }],
-        errors: {
-            partyName: "",
-            firstName: "",
-            lastName: "",
-            place: "",
-            date: "",
-            phoneNumber: "",
-
-        },
-        modal: {
-            open: false,
-        }
-
-    })
-
-    const handlePartyOrganizationChange = ({ target: { name, value } }) => {
-        setState(prevState => ({
-            ...prevState,
-            partyOrganization: {
-                ...prevState.partyOrganization,
-                [name]: value
-            }
-        }))
-    }
-
-    const setPartyErrors = (partyErrors) => {
-        setState(prevState => ({
-            ...prevState,
-            errors: {
-                ...partyErrors
-            }
-        }))
-    }
-
-    const handleGuestChange = (guests) => {
-        setState(prevState => ({
-            ...prevState,
-            guests
-
-        }))
-
-    }
-
-    const openModal = (e) => {
-        e.preventDefault();
-        setState(prevState => ({
-            ...prevState,
-            modal: {
-                open: true
-            }
-
-        }))
-    }
-
-    const handleSubmit = () => {
-        setState(prevState => ({
-            ...prevState,
-            modal: {
-                open: false
-            }
-
-        }))
-    }
-
-    const handleCancel = () => {
-        setState(prevState => ({
-            ...prevState,
-            modal: {
-                open: false
-            }
-        }))
-    }
-
-
-    return {
-        partyState: state,
-        handlePartyOrganizationChange,
-        handleGuestChange,
-        openModal,
-        handleSubmit,
-        setPartyErrors,
-        handleCancel
-    }
-}
-
 
 const Party = () => {
     const {
-        partyState: { partyOrganization, guests, modal },
+        partyState: { partyOrganization, guests, modal, errors },
         handlePartyOrganizationChange,
         handleGuestChange,
         openModal,
         handleSubmit,
         setPartyErrors,
+        setGuestErrors,
         handleCancel
     } = usePartyState();
 
     const handleClickSubmit = (e) => {
-        // check party organisation (validate all inputs in state.partyOrganization)
-        // if there exist at least one error show them on related input
-        // only if user has no errors -> then we need to show modal
-        // (note: when user inputs some values we need to remove error if exist for that input)
-
         e.preventDefault();
-        const errors = validateObject(partyOrganization, PARTY_ORGANISATION_VALIDATION_SCHEMA)
+        const partyErrors = validateObject(partyOrganization, PARTY_ORGANISATION_VALIDATION_SCHEMA)
 
-        if (Object.keys(errors).length > 0) {
-            debugger            
-            setPartyErrors(errors)
+        if (Object.keys(partyErrors).length > 0) {
+            setPartyErrors(partyErrors)
             return;
         }
-        openModal(e)
+        openModal(e);
+
     }
+
+
+    useEffect(() => {
+        setGuestErrors(guests.map(guest => validateObject(guest, { ...GUEST_VALIDATION_SCHEMA }))
+        )
+    }, [guests])
+
+
+    const isDisabled = useMemo(() => {
+        return Object.values(errors).length > 0;
+    }, [errors])
+
 
     return (
         <>
             <form id="form">
                 <div id="container">
                     <PartyOrganization
+                        errors={errors.partyOrganization}
                         handleChange={handlePartyOrganizationChange}
                         partyOrganization={partyOrganization} />
                     <GuestList
                         guests={guests}
+                        errors={errors.guests}
+                        setGuestErrors={setGuestErrors}
                         onChangeGuests={handleGuestChange} />
                     <Overview guests={guests} />
                 </div>
-                <SubmitButton onClick={handleClickSubmit} />
+                <SubmitButton
+                    onClick={handleClickSubmit}
+                    disabled={isDisabled}
+                />
             </form>
             <Modal
                 title="The affirmation"
@@ -198,14 +73,18 @@ const Party = () => {
                 onSubmit={handleSubmit}
             >
                 <p>
-                    <b>{partyOrganization.date}</b> at 
-                    <b>{partyOrganization.place}</b> will be 
+                    <b>{partyOrganization.date}</b> at &nbsp;
+                    <b>{partyOrganization.place}</b> will be &nbsp;
                     <b>"{partyOrganization.partyName}"</b> with next list of guests:
                 </p>
 
-                <div className="guests-list">
-
-                </div>
+                <ol className="guests-list">
+                    {guests.map(guest =>
+                        <li>
+                            {guest.firstName + " " + guest.lastName + " " + getAge(guest.birthDate)}
+                        </li>
+                    )}
+                </ol>
             </Modal>
         </>
     );
