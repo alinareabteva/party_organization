@@ -2,11 +2,11 @@ import React, { useMemo } from "react";
 import "./Overview.scss";
 
 const CURENT_DATE = new Date().getYear();
-const getAge = (birthDate) => {
+export const getAge = (birthDate) => {
     return CURENT_DATE - (new Date(birthDate).getYear());
 }
 
-const Overview = ({ guests }) => {    
+const Overview = ({ guests }) => {
 
     const typesOfAlcohol = useMemo(() => {
         return guests.reduce((uniqueAlcohol, guest) => {
@@ -16,7 +16,7 @@ const Overview = ({ guests }) => {
         }, [])
     }, [guests]);
 
-   
+
     const overviewData = useMemo(() => {
         return guests.reduce((acc, cur) => {
             const guestAge = getAge(cur.birthDate);
@@ -27,10 +27,10 @@ const Overview = ({ guests }) => {
                 acc.olderThan30++
             }
 
-            if (guestAge >= 20 && guestAge <=30) {
+            if (guestAge >= 20 && guestAge <= 30) {
                 acc.betweenYear++
             }
-            
+
             return acc;
         }, {
             youngerThan20: 0,
@@ -59,7 +59,7 @@ const Overview = ({ guests }) => {
                     <div className="item">Number of people older than 30</div>
                     <div className="item">{overviewData.olderThan30}</div>
                 </div>
-            </div>           
+            </div>
         </div>
     )
 };

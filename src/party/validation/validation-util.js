@@ -1,7 +1,4 @@
-const CURENT_DATE = new Date().getYear();
-const getAge = (birthDate) => {
-    return CURENT_DATE - (new Date(birthDate).getYear());
-}
+import { getAge } from "../overview/Overview";
 
 export const validatorHelper = (validator, errorMessage) => {
     return (value) => {
@@ -24,8 +21,12 @@ export const maxSymbolsValidator = (number, errorMessage) => {
     return validatorHelper(v => v.length <= number, errorMessage);
 }
 
-export const dateValidator = (limitYear, errorMessage) => {
+export const dateMinValidator = (limitYear, errorMessage) => {
     return validatorHelper(v => getAge(v) >= limitYear, errorMessage)
+}
+
+export const dateMaxValidator = (limitYear, errorMessage) => {
+    return validatorHelper(v => getAge(v) <= limitYear, errorMessage)
 }
 
 export const validateObject = (objectToValidate, schemaForValidate) => {
