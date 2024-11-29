@@ -2,11 +2,11 @@ import React from "react";
 import Button from "../button/Button";
 import "./SubmitButton.scss"
 
-const SubmitButton = ({onClick}) => {
+const SubmitButton = ({onClick, disabled}) => {
 
     return (
         <div className="submitForm">
-            <Button onClick={onClick}>Submit</Button>
+            <Button onClick={onClick} disabled={disabled}>Submit</Button>
         </div>
     )
 }

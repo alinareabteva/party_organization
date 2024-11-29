@@ -25,6 +25,17 @@ export const usePartyState = () => {
             },
             guests: []
         },
+        touched: {
+            partyOrganization: {
+                partyName: false,
+                firstName: false,
+                lastName: false,
+                place: false,
+                date: false,
+                phoneNumber: false,
+            },
+            guests: []
+        },
         modal: {
             open: false,
         }
@@ -37,7 +48,31 @@ export const usePartyState = () => {
             partyOrganization: {
                 ...prevState.partyOrganization,
                 [name]: value
+            },
+            touched: {
+                ...prevState.touched,
+                [name]: true
             }
+        }))
+    }
+
+    const handleGuestChange = (guestToReplace, id) => {
+        setState(prevState => ({
+            ...prevState,
+            guests: prevState.guests.map((guest, index) => {
+                if (index !== id) {
+                    return guest;
+                }
+
+                return guestToReplace;
+            }),
+
+            touched: {
+                ...prevState.touched,
+
+                
+            }
+
         }))
     }
 
@@ -49,7 +84,7 @@ export const usePartyState = () => {
                 partyOrganization: {
                     ...partyErrors
                 }
-               
+
             }
         }))
     }
@@ -60,18 +95,31 @@ export const usePartyState = () => {
             errors: {
                 ...prevState.errors,
                 guests: guestErrors
-               
+
             }
         }))
     }
 
-    const handleGuestChange = (guests) => {
-        setState(prevState => ({
+    const removeGuest = (id) => {
+        setState((prevState) => ({
             ...prevState,
-            guests
-
+            guests: prevState.guests.filter((el, index) => index !== id),
+            touched: {
+                ...prevState.touched,
+                guests: prevState.touched.guests.filter((el, index) => index !== id)
+            }
         }))
+    }
 
+    const addGuest = (guestToAdd) => {
+        setState((prevState) => ({
+            ...prevState,
+            guests: [...prevState.guests, guestToAdd],
+            touched: {
+                ...prevState.touched,
+                guests: [...prevState.touched.guests, {}]
+            }
+        }))
     }
 
     const openModal = (e) => {
@@ -109,6 +157,8 @@ export const usePartyState = () => {
         partyState: state,
         handlePartyOrganizationChange,
         handleGuestChange,
+        removeGuest,
+        addGuest,
         openModal,
         handleSubmit,
         setPartyErrors,

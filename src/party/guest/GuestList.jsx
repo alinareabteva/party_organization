@@ -11,49 +11,30 @@ export const GUEST_INITIAL_STATE = {
     alcohol: [],
 }
 
-const GuestList = ({ guests, onChangeGuests, errors }) => {
+const GuestList = ({ guests, onChangeGuest, removeGuest, addGuest, errors, touched }) => {
 
     const alcoholChange = (id, value) => {
-        onChangeGuests(guests.map((el, index) => {
-            if (id !== index) {
-                return el;
-            }
-            return {
-                ...el,
-                alcohol: value
-            }
-        }))
-
+        handleChange(id, "alcohol", value)
     }
 
     const handleChange = (id, name, value) => {
-        onChangeGuests(guests.map((el, index) => {
-            if (id !== index) {
-                return el;
-            }
-            return {
-                ...el,
-                [name]: value
-            }
-
-        }))
+        const guestByIndex = guests[id];
+        onChangeGuest({
+            ...guestByIndex,
+            [name]: value
+        }, id)
 
     }
 
     const onClickDelete = (id) => {
-        onChangeGuests(guests.filter((el, index) => id !== index))
-
+        removeGuest(id);
     }
 
-    const addGuest = (e) => {
+    const onClickAddGuest = (e) => {
         e.preventDefault();
-        onChangeGuests([
-            ...guests,
-            {
-                ...GUEST_INITIAL_STATE
-            }
-        ])
-
+        addGuest({
+            ...GUEST_INITIAL_STATE
+        })
     }
 
     const isDisabled = useMemo(() => {
@@ -70,6 +51,7 @@ const GuestList = ({ guests, onChangeGuests, errors }) => {
                         key={index}
                         index={index}
                         errors={errors[index]}
+                        touched={touched}
                         isLastItem={index === guests.length - 1}
                         guest={el}
                         handleGuestChange={handleChange}
@@ -80,7 +62,7 @@ const GuestList = ({ guests, onChangeGuests, errors }) => {
             </div>
             <div className="addGuest">
                 <Button
-                    onClick={addGuest}
+                    onClick={onClickAddGuest}
                     disabled={isDisabled}
                 >
                     Add Guest

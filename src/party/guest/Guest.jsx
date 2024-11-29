@@ -5,7 +5,7 @@ import Icon, { IconNames, IconSizes } from "../components/icon/icon";
 import { alcoholOptions } from "./Data";
 import "./Guest.scss";
 
-const Guest = ({ guest, index, handleGuestChange, onClickDelete, onAlcoholChange, isLastItem, errors }) => {
+const Guest = ({ guest, index, handleGuestChange, onClickDelete, onAlcoholChange, isLastItem, errors, touched }) => {
     const ref = useRef(null)
     const handleChange = ({ target: { name, value } }) => {
         handleGuestChange(index, name, value)
@@ -38,7 +38,7 @@ const Guest = ({ guest, index, handleGuestChange, onClickDelete, onAlcoholChange
                         label="First Name:"
                         placeholder="First Name"
                         type="text"
-                        error={errors?.firstName}
+                        error={touched?.firstName ? errors?.firstName : ""}
                         value={guest.firstName}
                         onChange={handleChange}
                     />
@@ -49,7 +49,7 @@ const Guest = ({ guest, index, handleGuestChange, onClickDelete, onAlcoholChange
                         label="Last Name:"
                         placeholder="Last Name"
                         type="text"
-                        error={errors?.lastName}
+                        error={touched?.lastName ? errors?.lastName : ""}
                         value={guest.lastName}
                         onChange={handleChange}
                     />
@@ -59,7 +59,7 @@ const Guest = ({ guest, index, handleGuestChange, onClickDelete, onAlcoholChange
                         name="birthDate"
                         label="Birth Date:"
                         type="date"
-                        error={errors?.birthDate}
+                        error={touched?.birthDate ? errors?.birthDate : ""}
                         value={guest.birthDate}
                         onChange={handleChange}
                     />

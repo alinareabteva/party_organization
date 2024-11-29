@@ -20,21 +20,11 @@ export const GUEST_VALIDATION_SCHEMA = {
             requiredValidator("Date is required"),
             dateMinValidator(18, "You must be 18 years old"),
             dateMaxValidator(50, "Sorry, you are so old for the party")
-
         ]
     },
     sex: {
         validators: [
-            requiredValidator("Date is required"),
-
+            requiredValidator("Sex is required"),
         ]
     },
-    alcohol: {
-        validators: [
-            requiredValidator("Date is required")
-
-
-        ]
-    }
-
 }

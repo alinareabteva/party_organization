@@ -2,7 +2,7 @@ import React from "react";
 import Input from "../components/input/Input";
 import "./PartyOrganization.scss";
 
-const PartyOrganization = ({ partyOrganization, handleChange, errors }) => {
+const PartyOrganization = ({ partyOrganization, handleChange, errors, touched }) => {
     return (
         <>
             <div className="row">
@@ -13,7 +13,7 @@ const PartyOrganization = ({ partyOrganization, handleChange, errors }) => {
                     type="text"
                     value={partyOrganization.partyName}
                     onChange={handleChange}
-                    error={errors?.partyName}
+                    error={touched?.partyName ? errors?.partyName : ""}
                 />
             </div>
 
@@ -25,7 +25,7 @@ const PartyOrganization = ({ partyOrganization, handleChange, errors }) => {
                     type="text"
                     value={partyOrganization.firstName}
                     onChange={handleChange}
-                    error={errors?.firstName}
+                    error={touched?.firstName ? errors?.firstName : ""}
                 />
                 <Input
                     id="lastName"
@@ -33,7 +33,7 @@ const PartyOrganization = ({ partyOrganization, handleChange, errors }) => {
                     type="text"
                     value={partyOrganization.lastName}
                     onChange={handleChange}
-                    error={errors?.lastName}
+                    error={touched?.lastName ? errors?.lastName : ""}
                 />
             </div>
 
@@ -45,7 +45,7 @@ const PartyOrganization = ({ partyOrganization, handleChange, errors }) => {
                     type="text"
                     value={partyOrganization.place}
                     onChange={handleChange}
-                    error={errors?.place}
+                    error={touched?.place ? errors?.place : ""}
                 />
             </div>
 
@@ -57,7 +57,7 @@ const PartyOrganization = ({ partyOrganization, handleChange, errors }) => {
                     type="date"
                     value={partyOrganization.date}
                     onChange={handleChange}
-                    error={errors?.date}
+                    error={touched?.date ? errors?.date : ""}
                 />
             </div>
 
@@ -69,7 +69,7 @@ const PartyOrganization = ({ partyOrganization, handleChange, errors }) => {
                     type="text"
                     value={partyOrganization.phoneNumber}
                     onChange={handleChange}
-                    error={errors?.phoneNumber}
+                    error={touched?.phoneNumber ? errors?.phoneNumber : ""}
                 />
             </div>
 
