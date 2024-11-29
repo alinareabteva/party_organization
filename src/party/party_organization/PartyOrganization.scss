@@ -1,0 +1,32 @@
+.row {
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+}
+
+input.input {
+    width: 21vw;
+}
+
+#firstName,
+#lastName {
+    min-width: 8vw;
+    width: 10.3vw;
+}
+
+@media screen and (max-width: 1000px) {
+    .row {
+        display: flex;
+        flex-direction: column;
+        margin-top: 10px;
+    }
+
+    #firstName,
+    #lastName {
+        width: 200px;
+    }
+
+    #firstName {
+        margin-bottom: 10px;
+    }
+}

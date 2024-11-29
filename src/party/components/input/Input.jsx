@@ -5,10 +5,10 @@ import classNames from 'classnames';
 import './Input.css';
 
 const Input = ({
-  id, 
-  className = '', 
-  label = '', 
-  error = '', 
+  id,
+  className = '',
+  label = '',
+  error = '',
   ...attrs
 }) => {
   const classes = classNames(
@@ -23,25 +23,24 @@ const Input = ({
         {label
           && <label className="inputLabel" htmlFor={id}>{label}</label>
         }
-        {attrs.required
-          && <span className="inputRequired">Required</span>
-        }
       </div>
-      <input
-        name={id}
-        id={id}
-        className={classes}
-        {...attrs}
-      />
-      {error
-        && <span className="inputError">{error}</span>
-      }
+      <div className="inputWithErrors">
+        {error
+          && <span className="inputError">{error}</span>
+        }
+        <input
+          name={id}
+          id={id}
+          className={classes}
+          {...attrs}
+        />
+      </div>
     </div>
   );
 };
 
 Input.propTypes = {
-  id: PropTypes.string.isRequired,
+  id: PropTypes.string,
   className: PropTypes.string,
   label: PropTypes.string,
   error: PropTypes.string,
